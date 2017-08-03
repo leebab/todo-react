@@ -8,7 +8,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      newTodo:'输入的文字',
+      newTodo:'',
       todoList:[
         {id:1,title:'第一个待办'},
         {di:2,title:'第二个待办'}
@@ -25,9 +25,9 @@ class App extends Component {
         <div className="inputWrapper">
         <TodoInput content={this.state.newTodo}/>
         </div>
-        {/* <ol>
-          {todus}
-        </ol> */}
+         <ol>
+          {todu}
+        </ol> 
       </div>
     );
   }
