@@ -15,7 +15,7 @@ class App extends Component {
   }
   render() {
     let todu = this.state.todoList.map((item,index)=>{
-      return ( <li key={index}><TodoItem todo = {item}/></li>);
+      return ( <li key={index}><TodoItem todo = {item} onToggle={this.toggle.bind(this)}/></li>);
     })
    
     return (
@@ -32,6 +32,10 @@ class App extends Component {
       </div>
     )
   }
+    toggle(e,todo){
+      todo.status = todo.status === 'completed'?'':'completed'
+      this.setState(this.state)
+    }
     changeTitle(event){
       this.setState({
         newTodo:event.target.value,
