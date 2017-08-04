@@ -13,6 +13,9 @@ class App extends Component {
       todoList:localStore.load('todoList')||[]
     }
   }
+  componentDidUpdate(){
+     localStore.save('todoList',this.state.todoList)
+  }
   render() {
     let todu = this.state.todoList.filter((item)=>!item.deleted).map((item,index)=>{
       return ( <li key={index}>
@@ -38,19 +41,17 @@ class App extends Component {
     delete(event,todo){
       todo.deleted=true
       this.setState(this.state)
-      localStore.save('todoList',this.state.todoList)
     }
     toggle(e,todo){
       todo.status = todo.status === 'completed'?'':'completed'
       this.setState(this.state)
-      localStore.save('todoList',this.state.todoList)
+     
     }
     changeTitle(event){
       this.setState({
         newTodo:event.target.value,
         todoList:this.state.todoList
       })
-      localStore.save('todoList',this.state.todoList)
     }
     addTodo(event){
       // console.log('我得添加一个TODOle')
@@ -64,7 +65,6 @@ class App extends Component {
         newTodo:'',
         todoList:this.state.todoList
       })
-      localStore.save('todoList',this.state.todoList)
     }
 }
 
