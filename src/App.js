@@ -3,6 +3,7 @@ import './App.css';
 import TodoInput from './TodoInput'
 import TodoItem from './TodoItem'
 import 'normalize.css'
+import UserDialog from './UserDialog'
 
 
 
@@ -16,7 +17,7 @@ class App extends Component {
     }
   }
   componentDidUpdate(){
-     localStore.save('todoList',this.state.todoList)
+
   }
   render() {
     let todu = this.state.todoList.filter((item)=>!item.deleted).map((item,index)=>{
@@ -33,10 +34,14 @@ class App extends Component {
         <TodoInput content={this.state.newTodo} 
           onChange={this.changeTitle.bind(this)}
           onSubmit={this.addTodo.bind(this)}/>
+
+
+          
         </div>
-         <ol className="todoList">
+         <ul className="todoList">
           {todu}
-        </ol> 
+        </ul> 
+        <UserDialog/>
       </div>
     )
   }
