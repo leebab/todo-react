@@ -3,7 +3,7 @@ import './App.css';
 import TodoInput from './TodoInput'
 import TodoItem from './TodoItem'
 import 'normalize.css'
-import * as localStore from './localStore'
+
 
 
 
@@ -12,7 +12,7 @@ class App extends Component {
     super(props)
     this.state = {
       newTodo:'',
-      todoList:localStore.load('todoList')||[]
+      todoList:[]
     }
   }
   componentDidUpdate(){
