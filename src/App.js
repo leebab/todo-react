@@ -12,13 +12,12 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
+      user:{},
       newTodo:'',
       todoList:[]
     }
   }
-  componentDidUpdate(){
-
-  }
+  
   render() {
     let todu = this.state.todoList.filter((item)=>!item.deleted).map((item,index)=>{
       return ( <li key={index}>
@@ -29,22 +28,23 @@ class App extends Component {
    
     return (
       <div className="App">
-        <h1>我的待办</h1>
+        <h1>{this.state.user.username||'我'}的待办</h1>
         <div className="inputWrapper">
         <TodoInput content={this.state.newTodo} 
           onChange={this.changeTitle.bind(this)}
           onSubmit={this.addTodo.bind(this)}/>
-
-
-          
         </div>
          <ul className="todoList">
           {todu}
         </ul> 
-        <UserDialog/>
+        <UserDialog onSignUp={this.onSignUp.bind(this)}/>
       </div>
     )
   }
+    onSignUp(user){
+      this.state.user = user
+      this.setState(this.state)
+    }
     delete(event,todo){
       todo.deleted=true
       this.setState(this.state)
