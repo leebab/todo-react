@@ -10,7 +10,7 @@ AV.init({
 export default AV
 
 export function signUp(username,password,successFn,errorFn){
-  var user = new AV.User()
+  var user = new AV.User()//新建AVUser 对象实例
   user.setUsername(username)
   user.setPassword(password)
   user.signUp().then(function(loginedUser){
@@ -18,8 +18,17 @@ export function signUp(username,password,successFn,errorFn){
       successFn.call(null,user)
   },function(error){
     errorFn.call(null,error)
+
   })
   return undefined
+}
+export function getCurrentUser(){
+  let user = AV.User.current()
+  if(user){
+    return getUserFromAVUser(user)
+  }else{
+    return null
+  }
 }
 function getUserFromAVUser(AVUser){
   return {
