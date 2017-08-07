@@ -16,3 +16,6 @@
 .App > .todoList> li:nth-child(even){
   background: transparent;
 }
+.title{
+  margin: 15px 0;
+}

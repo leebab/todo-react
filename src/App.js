@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import TodoInput from './TodoInput'
 import TodoItem from './TodoItem'
-import 'normalize.css'
+import './reset.css'
 import UserDialog from './UserDialog'
 import {getCurrentUser , signOut} from './leanCloud'
 
@@ -28,8 +28,8 @@ class App extends Component {
    
     return (
       <div className="App">
-        <h1>{this.state.user.username||'我'}的待办
-          {this.state.user.id?<button onClick={this.signOut.bind(this)}>注销</button>:null}
+        <h1 className='title'><span>{this.state.user.username||'我'}</span>的待办
+          {this.state.user.id?<button className ='zhuxiao' onClick={this.signOut.bind(this)}>注销</button>:null}
         </h1>
         <div className="inputWrapper">
         <TodoInput content={this.state.newTodo} 
