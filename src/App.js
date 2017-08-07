@@ -39,16 +39,12 @@ class App extends Component {
          <ul className="todoList">
           {todu}
         </ul> 
-         {this.state.user.id ? null : <UserDialog onSignIn={this.onSignIn.bind(this)} onSignUp={this.onSignUp.bind(this)}/>}
+         {this.state.user.id ? null : <UserDialog onSignIn={this.onSignUporsignIn.bind(this)} onSignUp={this.onSignUporsignIn.bind(this)}/>}
       </div>
     )
   }
-    onSignIn(user){
-      let stateCopy = JSON.parse(JSON.stringify(this.state)) 
-      stateCopy.user = user
-      this.setState(stateCopy)
-    }
-    onSignUp(user){
+   
+    onSignUporsignIn(user){
       let stateCopy = JSON.parse(JSON.stringify(this.state)) 
       stateCopy.user = user
       this.setState(stateCopy)
