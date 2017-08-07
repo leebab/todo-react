@@ -25,3 +25,9 @@
     border-radius: 4px;
     padding: 5px 20px;
 }
+ .UserDialog .pw{
+    
+    font-size: 12px;
+    margin-left: 13px;
+    line-height: 26px;
+} 
