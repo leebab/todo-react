@@ -58,8 +58,11 @@ class App extends Component {
       this.setState(stateCopy)
     }
     delete(event,todo){
-      todo.deleted=true
-      this.setState(this.state)
+      console.log('====')
+       TodoModel.destroy(todo.id,() => {
+       todo.deleted = true
+       this.setState(this.state)
+     })
     }
     toggle(e,todo){
       todo.status = todo.status === 'completed'?'':'completed'
@@ -80,6 +83,7 @@ class App extends Component {
         deleted:false
       }
       TodoModel.create(newTodo,(id)=>{
+        newTodo.id = id
         this.state.todoList.push(newTodo)
         this.setState({
           newTodo:'',
