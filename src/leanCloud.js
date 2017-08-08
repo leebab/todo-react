@@ -10,6 +10,18 @@ AV.init({
 export default AV
 
 export const TodoModel = {
+   getByUser(user, successFn, errorFn){
+     let query = new AV.Query('Todo')
+     query.find().then((response) => {
+       let array = response.map((t) => {
+         return {id: t.id, ...t.attributes}
+       })
+       successFn.call(null, array)
+     }, (error) => {
+       errorFn && errorFn.call(null, error)
+     })
+   },
+
   create({ status, title, deleted }, successFn, errorFn) {
     let Todo = AV.Object.extend('Todo')
     let todo = new Todo()
@@ -27,7 +39,15 @@ export const TodoModel = {
     }, function (error) {
       errorFn && errorFn.call(null, error)
     })
-  }, update() {
+  }, update({id,title,status,deleted},successFn,errorFn) {
+    let todo = AV.Object.createWithoutData('Todo',id)
+    title !== undefined && todo.set('title', title)
+    status !== undefined && todo.set('status', status)
+    deleted !== undefined && todo.set('deleted', deleted)
+
+    todo.save().then((response)=>{
+      successFn&&successFn.call(null)
+    },(error)=>errorFn&&errorFn.call(null,error))
 
   }, destroy(todoId, successFn, errorFn) {
   
@@ -37,7 +57,7 @@ export const TodoModel = {
     }, function (error) {
       errorFn && errorFn.call(null, error)
     })
-    
+
   }
 }
 
