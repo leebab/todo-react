@@ -17,12 +17,13 @@ class App extends Component {
       todoList:[]
     }
   let user = getCurrentUser()
-  if(user)
+  if(user){
     TodoModel.getByUser(user,(todos)=>{
     let stateCopy = JSON.parse(JSON.stringify(this.state))
     stateCopy.todoList = todos
     this.setState(stateCopy)
     })
+  }
   }
   
   render() {
@@ -92,7 +93,7 @@ class App extends Component {
       // console.log('我得添加一个TODOle')
       let newTodo = {
         title:event.target.value,
-        status:null,
+        status:'',
         deleted:false
       }
       TodoModel.create(newTodo,(id)=>{

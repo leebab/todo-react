@@ -21,7 +21,6 @@ export const TodoModel = {
        errorFn && errorFn.call(null, error)
      })
    },
-
   create({ status, title, deleted }, successFn, errorFn) {
     let Todo = AV.Object.extend('Todo')
     let todo = new Todo()
@@ -31,6 +30,7 @@ export const TodoModel = {
     let acl = new AV.ACL()
     acl.setPublicReadAccess(false)
     acl.setWriteAccess(AV.User.current(), true)
+    acl.setReadAccess(AV.User.current(), true)
 
     todo.setACL(acl)
 
