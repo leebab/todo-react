@@ -10,7 +10,9 @@ export default class TodoInput extends Component{
     submit(e){
         if(e.key === 'Enter'){
             // console.log('用户按回车了')
+         if (e.target.value.trim() !== '') {
             this.props.onSubmit(e)
+             }
         }
     }
     changeTitle(e){
