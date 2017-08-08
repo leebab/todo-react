@@ -16,6 +16,12 @@ export const TodoModel = {
     todo.set('title',title)
     todo.set('status',status)
     todo.set('deleted',deleted)
+    let acl = new AV.ACL()
+    acl.setPublicReadAccess(false)
+    acl.setWriteAccess(AV.User.current(),true)
+
+    todo.setACL(acl)
+    
     todo.save().then(function(response){
       successFn.call(null,response.id)
     },function(error){
@@ -24,7 +30,7 @@ export const TodoModel = {
   },update(){
 
   },destory(){
-    
+
   }
 }
 
