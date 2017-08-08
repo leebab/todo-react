@@ -4,7 +4,7 @@ import TodoInput from './TodoInput'
 import TodoItem from './TodoItem'
 import './reset.css'
 import UserDialog from './UserDialog'
-import {getCurrentUser , signOut} from './leanCloud'
+import {getCurrentUser , signOut , TodoModel} from './leanCloud'
 
 
 
@@ -39,7 +39,9 @@ class App extends Component {
          <ul className="todoList">
           {todu}
         </ul> 
-         {this.state.user.id ? null : <UserDialog onSignIn={this.onSignUporsignIn.bind(this)} onSignUp={this.onSignUporsignIn.bind(this)}/>}
+         {this.state.user.id ? null :
+          <UserDialog onSignIn={this.onSignUporsignIn.bind(this)} 
+          onSignUp={this.onSignUporsignIn.bind(this)}/>}
       </div>
     )
   }
@@ -72,23 +74,22 @@ class App extends Component {
     }
     addTodo(event){
       // console.log('我得添加一个TODOle')
-      this.state.todoList.push({
-        id:idMaker(),
+      let newTodo = {
         title:event.target.value,
         status:null,
         deleted:false
-      })
-      this.setState({
-        newTodo:'',
-        todoList:this.state.todoList
+      }
+      TodoModel.create(newTodo,(id)=>{
+        this.state.todoList.push(newTodo)
+        this.setState({
+          newTodo:'',
+          todoList:this.state.todoList
+        })
+      },(error)=>{
+        console.log(error)
       })
     }
 }
 
 export default App;
 
-let id = 0
-function idMaker(){
-  id+=1
-  return id
-}
